@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+:root{
+  --color-yellow: #f9c74f;
+  --color-purple: #9d4edd;
+
+}
+
+.Home {
+  text-align: center;
+  padding: 4em 0;
+}
