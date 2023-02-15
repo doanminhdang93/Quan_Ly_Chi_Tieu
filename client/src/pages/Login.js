@@ -1,28 +1,70 @@
-import React, {useContext} from "react"
-import { GoogleAuthProvider,signInWithPopup, getAuth } from "firebase/auth";
+import React, { useContext } from "react";
+import { GoogleAuthProvider, signInWithPopup, getAuth } from "firebase/auth";
 import { AuthContext } from "../context/AuthProvider";
 import { useNavigate } from "react-router-dom";
 
-export default function Login(){
-    const auth = getAuth();
-    const {user} = useContext(AuthContext);
-    const navigate = useNavigate();
+export default function Login() {
+  const auth = getAuth();
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
 
-    const handleLoginWithGoogle = async() => {
-        const provider = new GoogleAuthProvider();
-        await signInWithPopup(auth, provider);
-    }
-    if(user?.uid){
-        navigate('/');
-        return;
-    }
+  const handleLoginWithGoogle = async () => {
+    const provider = new GoogleAuthProvider();
+    await signInWithPopup(auth, provider);
+  };
+  if (user?.uid) {
+    navigate("/");
+    return;
+  }
 
-    return (
-        <>
-            <h1 style={{textAlign : 'center', marginTop: '100px'}}>
-                Chào mừng bạn đến với website quản lý chi tiêu
-            </h1> 
-            <button onClick={handleLoginWithGoogle} type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Đăng nhập với Google</button>
-        </>
-    )
+  return (
+    <>
+      <div className="bg-gray-300  flex justify-center">
+        <div className="container h-screen flex justify-center items-center">
+          <div className="p-8 bg-white rounded-lg max-w-6xl pb-10">
+            <div className="flex justify-center mb-4 font-bold text-2xl pb-5">
+                Welcome back!
+            </div>
+
+            <input
+              type="text"
+              className="h-12 rounded w-full border px-3 focus:text-black focus:border-blue-100"
+              placeholder="Email..."
+            />
+
+            <input
+              type="password"
+              className="h-12 mt-3 rounded w-full border px-3 focus:text-black focus:border-blue-100"
+              placeholder="Mật khẩu..."
+            />
+
+            <div className="flex justify-end items-center mt-2">
+              <a href="#" className="text-gray-400 hover:text-gray-600">
+                Quên mật khẩu?
+              </a>
+            </div>
+
+            <button className="uppercase h-12 mt-3 text-white w-full rounded bg-red-700 hover:bg-red-800">
+              Đăng nhập
+            </button>
+
+            <div className="flex justify-between items-center mt-3">
+              <hr className="w-full" />
+              <span className="p-2 text-gray-400 mb-1">Hoặc</span>
+              <hr className="w-full" />
+            </div>
+
+            <button className="uppercase h-12 mt-3 text-white w-full rounded bg-blue-800 hover:bg-blue-900">
+              <box-icon type='logo' color="white" name="facebook"></box-icon>
+              <span className="px-2">Facebook</span>
+            </button>
+            <button onClick={handleLoginWithGoogle} className="uppercase h-12 mt-3 text-white w-full rounded bg-red-800 hover:bg-red-900">
+              <box-icon type='logo' color="white" name="google"></box-icon>
+              <span className="px-3">Google</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </>
+  );
 }
