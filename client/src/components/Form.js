@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import {useForm} from 'react-hook-form';
 import {default as api} from '../store/apiSlide';
+import 'boxicons';
 
 function Form() {
-    const {register, handleSubmit, resetField,formState: { errors }} = useForm();
+    const {register, handleSubmit, resetField,formState: { errors }, setValue, reset} = useForm();
 
     const {data, isFetching, isSuccess, isError} = api.useGetLabelsQuery();
     const [addTransaction] = api.useAddTransactionMutation();
@@ -11,12 +12,9 @@ function Form() {
     const [updateTransaction] = api.useUpdateTransactionMutation();
 
     const [updateID,setUpdateID] = useState(undefined);
-    const [ButtonTxt,setButtonTxt] = useState('Tạo khoản chi');
-    const [btnColor,setButtonColor] = useState("#6366f1");
-    const [inputField,setInputField] = useState({
-        name: '',
-        type: '',
-        cost: 0
+    const [btn,setBtn] = useState({
+        btnColor: "#6366f1",
+        btnText: "Tạo khoản chi"
     })
 
     let Transactions;
@@ -26,34 +24,29 @@ function Form() {
         //console.log(e.target.dataset.id);
         if(!e.target.dataset.id) setUpdateID(undefined);
         deleteTransaction({_id: e.target.dataset.id});
-        setButtonTxt('Tạo khoản chi');
-        setButtonColor("#6366f1");
+        setBtn({
+            btnColor: "#6366f1",
+            btnText: "Tạo khoản chi"
+        })
+        setUpdateID(undefined);
+        
+        setValue('name','');
+        setValue('cost','');
     }
     const handleClickUpdateButton = (e) =>{
-        setButtonTxt('Sửa khoản chi');
-        setButtonColor("#4CAF50");
+        setBtn({
+            btnColor: "#4CAF50",
+            btnText: "Sửa khoản chi"
+        })
         //console.log(e.target.dataset.id);
         if(!e.target.dataset.id) setUpdateID(undefined);
-
-        //updateTransaction({_id: e.target.dataset.id});
-        console.log(e.target.dataset);
-        // updateTransaction({
-        //     _id: e.target.dataset.id,
-        //     name: 'mua xe',
-        //     type: 'Chi phí phát sinh',
-        //     cost: 200
-        // })
-        // updateTransaction([{_id: e.target.dataset.id},{
-        //     name: 'mua xe',
-        //     type: 'Chi phí phát sinh',
-        //     cost: 200
-        // }])
+        //console.log(e.target.dataset);
         setUpdateID(e.target.dataset.id);
-        setInputField({
-            name: e.target.dataset.name,
-            type: e.target.dataset.type,
-            cost: e.target.dataset.cost
-        })
+
+        setValue('name',e.target.dataset.name);
+        setValue('type',e.target.dataset.type);
+        setValue('cost',e.target.dataset.cost);
+        setValue('month',e.target.dataset.month);
     }
 
     if(isFetching) { // we don't have data here
@@ -65,21 +58,23 @@ function Form() {
         Transactions = <div>Error</div>;
     }
     const onSubmit = async (data) =>{
-        console.log(typeof(data.type));
+        //console.log(typeof(data.type));
         if(!data) return {};
-        
+
         if(!updateID){
             await addTransaction(data).unwrap();
         }
         else{
             await updateTransaction([
                 {_id:updateID},
-                {name: data.name,type: data.type, cost: data.cost},
+                {name: data.name,type: data.type, cost: data.cost, month: data.month},
             ])
             setUpdateID(undefined);
         }   
-        setButtonTxt('Tạo khoản chi');
-        setButtonColor("#6366f1");
+        setBtn({
+            btnColor: "#6366f1",
+            btnText: "Tạo khoản chi"
+        })
 
         resetField('name');
         resetField('cost');
@@ -89,38 +84,50 @@ function Form() {
     return (
         <div className='form max-w-sm mx-auto w-96'> 
             <h1 className='font-bold pb-6 text-2xl'>Giao dịch</h1>
-            <form id='form' onSubmit={handleSubmit(onSubmit)}>
+            <form id='form' onSubmit={handleSubmit(onSubmit)} onReset={reset}>
                 <div className='grid gap-4'>
+                    <select className='form-input' {...register('month')}>
+                        <option value='Tháng 1' defaultValue>Tháng 1</option>
+                        <option value='Tháng 2'>Tháng 2</option>
+                        <option value='Tháng 3'>Tháng 3</option>
+                        <option value='Tháng 4'>Tháng 4</option>
+                        <option value='Tháng 5'>Tháng 5</option>
+                        <option value='Tháng 6'>Tháng 6</option>
+                        <option value='Tháng 7'>Tháng 7</option>
+                        <option value='Tháng 8'>Tháng 8</option>
+                        <option value='Tháng 9'>Tháng 9</option>
+                        <option value='Tháng 10'>Tháng 10</option>
+                        <option value='Tháng 11'>Tháng 11</option>
+                        <option value='Tháng 12'>Tháng 12</option>
+                    </select>
                     <div className='input-group'>
-                        <input value={inputField.name} type='text' placeholder='Nhập tên khoản chi...' className='form-input'
-                            {...register('name',
-                                    {required: true,maxLength: 30}
-                                )
-                            }
+                        <input defaultValue='' type='text' placeholder='Nhập tên khoản chi...' className='form-input'
+                            {...register('name', {required: true,maxLength: 30})}
                         ></input>
                         {errors?.name?.type === "required" && <p>Bạn cần nhập tên khoản chi</p>}
                         {errors?.name?.type === "maxLength" && (
                             <p>Tên khoản chi không được vượt quá 30 ký tự</p>
                         )}
                     </div>
-                    <select value={inputField.type} className='form-input' {...register('type')}>
+                    <select className='form-input' {...register('type')}>
                         <option value='Gửi tiết kiệm' defaultValue>Gửi tiết kiệm</option>
                         <option value='Chi phí sinh hoạt'>Chi phí sinh hoạt</option>
                         <option value='Chi phí phát sinh'>Chi phí phát sinh</option>
                     </select>
                     <div className='input-group'>
-                        <input value={inputField.cost} type='number' placeholder='Nhập số tiền cần chi...' className='form-input'
-                            {...register('cost',
-                                {required: true, min:0,}
-                            )}
+                        <input defaultValue = '' type='number' placeholder='Nhập số tiền cần chi...' className='form-input'
+                            {...register('cost', {required: true, min:0, max:1000000000})}
                         ></input>
                         {errors?.cost?.type === "required" && <p>Bạn cần nhập số tiền</p>}
                         {errors?.cost?.type === "min" && (
-                            <p>Bạn cần nhập số lớn hơn 0</p>
+                            <p>Bạn cần nhập số tiền lớn hơn $0</p>
+                        )}
+                        {errors?.cost?.type === "max" && (
+                            <p>Bạn cần nhập số tiền nhỏ hơn $1000.000.000</p>
                         )}
                     </div>
                     <div className='submit-btn'>
-                        <button className="rounded-lg border py-2 text-white  w-full" style={{backgroundColor: `${btnColor}`}}>{ButtonTxt}</button>
+                        <button className="rounded-lg border py-2 text-white  w-full" style={{backgroundColor: `${btn.btnColor}`}}>{btn.btnText}</button>
                     </div>
                 </div>
             </form>
@@ -140,7 +147,7 @@ function Transaction({category, handleDelete, handleUpdate}){
                 <box-icon onClick={handleDelete}  data-id={category._id ?? ""} size='16px' color={category.color ?? "#e5e5e5"} name='trash'></box-icon> 
             </button>
             <button>    
-                <box-icon onClick={handleUpdate} data-cost={category.cost} data-type={category.type} data-name={category.name} data-id={category._id ?? ""} size='16px' color={category.color ?? "#e5e5e5"} type='solid' name = 'edit'></box-icon>
+                <box-icon onClick={handleUpdate} data-month={category.month} data-cost={category.cost} data-type={category.type} data-name={category.name} data-id={category._id ?? ""} size='16px' color={category.color ?? "#e5e5e5"} type='solid' name = 'edit'></box-icon>
             </button>
             <span className='block w-full pb-3 pr-4 flex justify-center mt-2'>{category.name ?? ""}</span>
         </div>
