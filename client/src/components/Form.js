@@ -4,7 +4,7 @@ import {default as api} from '../store/apiSlide';
 import 'boxicons';
 
 function Form() {
-    const {register, handleSubmit, resetField,formState: { errors }, setValue, reset} = useForm();
+    const {register, handleSubmit, resetField,formState: { errors }, setValue, reset, setFocus} = useForm();
 
     const {data, isFetching, isSuccess, isError} = api.useGetLabelsQuery();
     const [addTransaction] = api.useAddTransactionMutation();
@@ -43,6 +43,7 @@ function Form() {
         //console.log(e.target.dataset);
         setUpdateID(e.target.dataset.id);
 
+        setFocus('name',{shouldSelect: true});    
         setValue('name',e.target.dataset.name);
         setValue('type',e.target.dataset.type);
         setValue('cost',e.target.dataset.cost);
