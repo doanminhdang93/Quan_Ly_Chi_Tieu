@@ -133,7 +133,9 @@ function Form() {
             </form>
             <div className='flex flex-col py-6 gap-3'>
                 <h1 className='py-4 font-bold text-2xl'>Lịch sử</h1>
-                {Transactions}
+                <div className='overflow-y-auto h-44'>
+                    {Transactions}
+                </div>
             </div>
         </div>
     );
@@ -142,7 +144,7 @@ function Form() {
 function Transaction({category, handleDelete, handleUpdate}){
     if(!category) return null;
     return(
-        <div className='item flex justify-center bg-gray-50 py-2 rounded-lg' style={{borderRight: `8px solid ${category.color ?? "#e5e5e5"}`}}>
+        <div className='item flex justify-center bg-gray-50 py-2 rounded-xl' style={{borderRight: `8px solid ${category.color ?? "#e5e5e5"}`}}>
             <button className='px-2'> 
                 <box-icon onClick={handleDelete}  data-id={category._id ?? ""} size='16px' color={category.color ?? "#e5e5e5"} name='trash'></box-icon> 
             </button>

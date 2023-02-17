@@ -2,6 +2,8 @@ import '../Home.css';
 import Graph from '../components/Graph';
 import Form from '../components/Form';
 import UserMenu from '../components/UserMenu';
+import Table from '../components/Table';
+import MonthlyGraph from '../components/MonthlyGraph';
 
 function Home(){
     return(
@@ -14,13 +16,27 @@ function Home(){
                     <UserMenu></UserMenu>
                 </div> 
                 
-                {/* grid column */}
-                <div className="grid md:grid-cols-2 gap-4"> 
-                    {/* Graph */}
-                    <Graph></Graph>
-                    {/* Form */}
-                    <Form></Form>
-                </div>
+                <div className="grid grid-cols-1 gap-4">
+                    {/* grid column */}
+                    <div className="grid md:grid-cols-2 gap-4"> 
+                        {/* Graph */}
+                        <Graph></Graph>
+                        {/* Form */}
+                        <Form></Form>
+                    </div>
+
+                    <h1 className="text-4xl font-bold mt-6">Biểu đồ mức chi tiêu biến động qua các tháng</h1>
+                    {/* Monthly Graph */}
+                    <div>
+                        <MonthlyGraph></MonthlyGraph>
+                    </div>
+
+                    <h1 className="text-4xl font-bold mt-6">Bảng thống kê chi tiêu hàng tháng</h1>
+                    {/* Table */}
+                    <div className='flex justify-center '>
+                        <Table></Table>
+                    </div>
+                </div>    
             </div>
         </div>
     )
