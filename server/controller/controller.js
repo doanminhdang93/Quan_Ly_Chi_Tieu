@@ -22,13 +22,14 @@ async function get_Categories(req, res){
 
 // post: http://localhost:8080/api/transaction
 async function create_Transaction(req, res){
-    let {name,type,cost} = req.body;
+    let {name,type,cost,month} = req.body;
     if(!req.body) return res.status(400).json("Post HTTP Data not provided");
 
     const create = await new model.Transactions({
         name,
         type,
         cost,
+        month,
         date: new Date()
     });
     
@@ -57,7 +58,7 @@ async function update_Transaction(req, res){
     if(!req.body) return res.status(400).json({message: "Request body is not found"});
     //console.log(req.body);
     let data = req.body;
-    //let newTransaction = {name: "Mua trái phiếu",type: "Gửi tiết kiệm",cost: 150};
+    //let newTransaction = {month: "Tháng 1", name: "Mua trái phiếu",type: "Gửi tiết kiệm",cost: 150};
     let newTransaction = data[1];
     await model.Transactions.updateOne(data[0],{$set: newTransaction},function(err){
         if(err) throw err;
@@ -84,7 +85,7 @@ async function get_Labels(req, res){
             $unwind: "$categories_info",
         }
     ]).then(result => {
-        let data = result.map(v => Object.assign({},{_id: v._id, name: v.name, type: v.type, cost: v.cost, color: v.categories_info['color']}));
+        let data = result.map(v => Object.assign({},{_id: v._id, name: v.name, type: v.type, cost: v.cost, month: v.month, color: v.categories_info['color']}));
         res.json(data);
     }).catch(error => {
         res.status(400).json("Lookup Collection Error");
