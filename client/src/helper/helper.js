@@ -45,7 +45,7 @@ export function getLabels(transaction) {
     return percentage;
 }
 
-export function chart_Data(transaction, custom){
+export function chart_Data(transaction){
     let bg = _.map(transaction, a => a.color);
     bg = _.uniq(bg); // return unique value of an array
     let dataValue = getSum(transaction);
@@ -67,7 +67,7 @@ export function chart_Data(transaction, custom){
       },
     };
     //console.log(config);
-    return custom ?? config;
+    return config;
 }
 
 export function monthlyChart_Data(transaction){
