@@ -3,7 +3,7 @@ import {useForm} from 'react-hook-form';
 import {default as api} from '../store/apiSlide';
 import 'boxicons';
 
-function Form() {
+const Form = () =>{
     const {register, handleSubmit, resetField,formState: { errors }, setValue, reset, setFocus} = useForm();
 
     const {data, isFetching, isSuccess, isError} = api.useGetLabelsQuery();
@@ -142,7 +142,7 @@ function Form() {
     );
 }
 
-function Transaction({category, handleDelete, handleUpdate}){
+const Transaction = ({category, handleDelete, handleUpdate}) =>{
     if(!category) return null;
     return(
         <div className='item flex justify-center bg-gray-50 py-2 rounded-xl' style={{borderRight: `8px solid ${category.color ?? "#e5e5e5"}`}}>

@@ -2,7 +2,7 @@ import React from 'react';
 import {default as api} from '../store/apiSlide';
 import { getLabels } from '../helper/helper';
 
-function Labels() {
+const Labels = () =>{
     // console.log(api.useGetCategoriesQuery());
     const {data, isFetching, isSuccess, isError} = api.useGetLabelsQuery();
     let Transactions;
@@ -22,7 +22,7 @@ function Labels() {
         </>
     );
 }
-function LabelComponent({data}){
+const LabelComponent = ({data}) =>{
     if(!data) return <></>;
     return (
         <div className="labels flex justify-between">

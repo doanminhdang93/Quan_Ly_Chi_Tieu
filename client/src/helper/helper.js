@@ -5,7 +5,7 @@ export function getSum(transaction, type){
     let sum = _(transaction)
                 .groupBy("type")
                 .map((objs,key) => {
-                    if(!type) return _.sumBy(objs,'cost')  // get sum of same type
+                    if(!type) return _.sumBy(objs,'cost')  // get sum by same type
                     return {
                         'type': key,
                         'color': objs[0].color,
@@ -15,6 +15,22 @@ export function getSum(transaction, type){
                 .value()
     //console.log(sum);
     return sum;
+}
+
+export function getSumByMonth(transaction, month) {
+  //console.log(transaction);
+  let sum = _(transaction)
+            .groupBy("month")
+            .map((objs,key) =>{
+              if(!month) return _.sumBy(objs,'cost')   // get sum by month
+              return {
+                  'month': key,
+                  'total': _.sumBy(objs,'cost')
+              }
+            })
+            .value()
+  //console.log(sum);
+  return sum;
 }
 
 // calculate the percentage
@@ -50,7 +66,26 @@ export function chart_Data(transaction, custom){
         cutout: 115,
       },
     };
+    //console.log(config);
     return custom ?? config;
+}
+
+export function monthlyChart_Data(transaction){
+  let dataValue = getSumByMonth(transaction);
+  //console.log(dataValue);
+  const labels = ['Tháng 1','Tháng 2','Tháng 3','Tháng 4','Tháng 5','Tháng 6','Tháng 7','Tháng 8','Tháng 9','Tháng 10','Tháng 11','Tháng 12'];
+  const config = {
+    labels: labels,
+    datasets: [{
+      label: 'Số tiền đã chi',
+      data: dataValue,
+      fill: true,
+      borderColor: '#b851c1',
+      tension: 0.1
+    }]
+  };
+  //console.log(config);
+  return config;
 }
 
 export function getTotal(transaction){

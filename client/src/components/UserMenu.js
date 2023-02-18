@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthProvider";
 import 'boxicons';
 
-function UserMenu() {
+const UserMenu = () =>{
   const {
     user: { photoURL, auth },
   } = useContext(AuthContext);

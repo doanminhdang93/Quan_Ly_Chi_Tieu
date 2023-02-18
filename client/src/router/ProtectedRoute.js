@@ -1,7 +1,7 @@
 import React from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 
-export default function ProtectedRoute({children}){
+const ProtectedRoute = ({children}) =>{
     const navigate = useNavigate();
     if(!localStorage.getItem('accessToken')){
         navigate('/');    
@@ -12,3 +12,4 @@ export default function ProtectedRoute({children}){
         <Outlet></Outlet>
     )
 }
+export default ProtectedRoute;

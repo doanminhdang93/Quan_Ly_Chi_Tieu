@@ -4,8 +4,9 @@ import Form from '../components/Form';
 import UserMenu from '../components/UserMenu';
 import Table from '../components/Table';
 import MonthlyGraph from '../components/MonthlyGraph';
+import ScrollButton from '../components/ScrollButton';
 
-function Home(){
+const Home = () =>{
     return(
         <div className="Home bg-gray-100">
             <div className="container mx-auto max-w-6xl text-center drop-shadow-lg text-gray-800">
@@ -35,6 +36,10 @@ function Home(){
                     {/* Table */}
                     <div className='flex justify-center '>
                         <Table></Table>
+                    </div>
+                    <div className='flex justify-end'>
+                    {/* Scroll to top button */}
+                        <ScrollButton></ScrollButton>
                     </div>
                 </div>    
             </div>

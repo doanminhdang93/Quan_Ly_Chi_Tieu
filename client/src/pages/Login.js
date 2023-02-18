@@ -3,7 +3,7 @@ import { GoogleAuthProvider, signInWithPopup, getAuth } from "firebase/auth";
 import { AuthContext } from "../context/AuthProvider";
 import { useNavigate } from "react-router-dom";
 
-export default function Login() {
+const Login = () =>{
   const auth = getAuth();
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -68,3 +68,4 @@ export default function Login() {
     </>
   );
 }
+export default Login;

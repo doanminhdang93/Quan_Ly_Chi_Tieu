@@ -7,7 +7,7 @@ import {default as api} from '../store/apiSlide';
 
 Chart.register(ArcElement);
 
-export default function Graph() {
+const Graph = () =>{
   const {data, isFetching, isSuccess, isError} = api.useGetLabelsQuery();
     let GraphData; 
     if(isFetching) { // we don't have data here
@@ -36,3 +36,4 @@ export default function Graph() {
     </div>
   );
 }
+export default Graph;
