@@ -4,7 +4,7 @@ import { default as api } from "../store/apiSlide";
 const Table = () =>{
     const { data, isFetching, isSuccess, isError } = api.useGetTransactionQuery();
     //console.log(api.useGetTransactionQuery());
-
+    
     let RenderTable;
 
     if (isFetching) {

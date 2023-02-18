@@ -7,10 +7,10 @@ import { monthlyChart_Data } from '../helper/helper';
 Chart.register(LineElement,Title, Tooltip, Legend, CategoryScale, LinearScale, PointElement,Filler);
 
 
-const MonthlyGraph = () =>{
+function MonthlyGraph() {
     const options = {
         responsive: true,
-        maintainAspectRatio: false,     
+        maintainAspectRatio: false
     }
 
     const {data, isFetching, isSuccess, isError} = api.useGetLabelsQuery(); 
@@ -27,7 +27,7 @@ const MonthlyGraph = () =>{
 
 
     return (
-        <div className="relative mx-auto w-11/12 h-96">
+        <div className="flex justify-center mx-auto w-11/12 h-96">
             {MonthlyGraphData}
         </div>
     );
