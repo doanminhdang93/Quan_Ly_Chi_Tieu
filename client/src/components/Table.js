@@ -43,14 +43,14 @@ const Table = () =>{
     let RenderTable;
     
     if (isFetching) {
-        RenderTable = <div>Fetching</div>;
+        RenderTable = <tr><td>Fetching</td></tr>;
     } else if (isSuccess) {
         let dataForSort = [...data];
         let dataSortedByCost = dataForSort.sort((a,b) => a.cost - b.cost);
         //console.log(dataSortedByCost);
         RenderTable = dataSortedByCost.map((v) => <TableData key={v._id} data={v} handleUpdate = {handleClickUpdateBtn} handleDelete = {handleClickDeleteBtn}></TableData>);
     } else if (isError) {
-        RenderTable = <div>Error</div>;
+        RenderTable = <tr><td>Error</td></tr>;
     }
 
     return (
@@ -59,7 +59,7 @@ const Table = () =>{
                 <thead className="text-xs flex w-full text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr className="flex w-full">
                         <th scope="col" className="p-4 w-1/5">Tháng</th>
-                        <th scope="col" className="p-4 w-1/5 mr-10">Tên khoản chi</th>
+                        <th scope="col" className="p-4 w-1/5 mr-14">Tên khoản chi</th>
                         <th scope="col" className="p-4 w-1/5 ">Phân loại</th>
                         <th scope="col" className="p-4 w-1/5">Số tiền đã chi</th>
                         <th scope="col" className="p-4 w-1/5">Chức năng</th>
@@ -131,7 +131,6 @@ const Table = () =>{
                                         <div className='submit-btn flex justify-end mt-6'>
                                             <button
                                             className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                                            
                                             onClick={() => setShowModal(false)}
                                             >
                                                 Đóng
@@ -158,10 +157,10 @@ const TableData = ({data, handleDelete,handleUpdate}) =>{
         
             <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 flex w-full">
                 <th scope="row" className="p-4 w-1/5 font-medium text-gray-900 whitespace-nowrap dark:text-white">{data.month}</th>
-                <th className="p-4 w-1/5 mr-2">{data.name}</th>
-                <th className="p-4 w-1/5 ml-8 ">{data.type}</th>
-                <th className="p-4 w-1/5 pl-14">${data.cost}</th>
-                <th className="p-4 w-1/5 pl-10">
+                <th className="p-4 w-1/5 mr-2 pr-6">{data.name}</th>
+                <th className="p-4 w-1/5 ml-8 pr-6">{data.type}</th>
+                <th className="p-4 w-1/5 pl-16">${data.cost}</th>
+                <th className="p-4 w-1/5 pl-11">
                     <button><box-icon onClick={handleDelete} data-id = {data._id ?? ""} color="#9097a3" name="trash"></box-icon></button>
                     <button><box-icon onClick={handleUpdate} data-cost = {data.cost} data-type = {data.type} data-name = {data.name} data-month = {data.month} data-id = {data._id ?? ""} color="#9097a3" name="edit"></box-icon></button>
                 </th>

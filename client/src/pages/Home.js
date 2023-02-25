@@ -26,13 +26,13 @@ const Home = () =>{
                         <Form></Form>
                     </div>
 
-                    <h1 className="text-4xl font-bold mt-6">Biểu đồ mức chi tiêu biến động qua các tháng</h1>
+                    <h1 className="text-4xl font-bold mt-12">Biểu đồ mức chi tiêu biến động qua các tháng</h1>
                     {/* Monthly Graph */}
                     <div>
                         <MonthlyGraph></MonthlyGraph>
                     </div>
 
-                    <h1 className="text-4xl font-bold mt-6">Bảng thống kê chi tiêu hàng tháng</h1>
+                    <h1 className="text-4xl font-bold mt-12">Bảng thống kê chi tiêu hàng tháng</h1>
                     {/* Table */}
                     <div className='flex justify-center '>
                         <Table></Table>
