@@ -103,11 +103,11 @@ const Table = () =>{
                                         </select>
                                         <div className='input-group'>
                                             <input defaultValue='' type='text' placeholder='Nhập tên khoản chi...' className='form-input'
-                                                {...register('name', {required: true,maxLength: 30})}
+                                                {...register('name', {required: true,maxLength: 50})}
                                             ></input>
                                             {errors?.name?.type === "required" && <p>Bạn cần nhập tên khoản chi</p>}
                                             {errors?.name?.type === "maxLength" && (
-                                                <p>Tên khoản chi không được vượt quá 30 ký tự</p>
+                                                <p>Tên khoản chi không được vượt quá 50 ký tự</p>
                                             )}
                                         </div>
                                         <select className='form-input' {...register('type')}>
