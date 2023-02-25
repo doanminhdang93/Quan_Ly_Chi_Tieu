@@ -1,6 +1,8 @@
 # Quan_Ly_Chi_Tieu
 Website quản lý chi tiêu với các chức năng chính
-1. Đăng nhập đăng xuất bằng tài khoản Google sử dụng Firebase
-2. Kết nối cơ sở dữ liệu với MongoDB, ExpressJS và NodeJS.
-3. CRUD các khoản chi tiêu 
-4. Vẽ biểu đồ % tỷ lệ các loại trong tổng chi tiêu
+- CRUD các khoản chi.
+- Đăng nhập, đăng xuất với tài khoản Google sử dụng Firebase.
+- Vẽ biểu đồ % cho tổng các khoản chi.
+- Vẽ biểu đồ biến động mức chi tiêu hàng tháng.
+- Lập bảng thống kê các khoản chi hàng tháng.
+- Kết nối database với MongoDB atlas.
