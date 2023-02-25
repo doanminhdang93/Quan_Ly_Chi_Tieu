@@ -10,7 +10,7 @@ const Home = () =>{
     return(
         <div className="Home bg-gray-100">
             <div className="container mx-auto max-w-6xl text-center drop-shadow-lg text-gray-800">
-                <h1 className="text-5xl py-8 mb-2 bg-slate-700 text-white rounded-2xl border border-gray-200">Quản lý chi tiêu</h1>
+                <h1 className="text-5xl py-6 mb-2 bg-slate-700 text-white rounded-2xl border border-gray-200">Quản lý chi tiêu</h1>
                 
                 {/* UserMenu */}
                 <div className="flex justify-end">   
@@ -41,7 +41,9 @@ const Home = () =>{
                     {/* Scroll to top button */}
                         <ScrollButton></ScrollButton>
                     </div>
-                </div>    
+                </div>  
+                
+                <h1 className="text-2xl py-3 mt-10 bg-slate-700 text-white rounded-xl border border-gray-200">© 2023 Copyright</h1>  
             </div>
         </div>
     )
