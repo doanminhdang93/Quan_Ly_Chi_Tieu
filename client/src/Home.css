@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 .Home {
   text-align: center;
   padding: 2em 0;

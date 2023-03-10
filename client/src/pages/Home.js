@@ -25,13 +25,11 @@ const Home = () =>{
                         {/* Form */}
                         <Form></Form>
                     </div>
-
                     <h1 className="text-4xl font-bold mt-12">Biểu đồ mức chi tiêu biến động qua các tháng</h1>
                     {/* Monthly Graph */}
                     <div>
                         <MonthlyGraph></MonthlyGraph>
                     </div>
-
                     <h1 className="text-4xl font-bold mt-12">Bảng thống kê chi tiêu hàng tháng</h1>
                     {/* Table */}
                     <div className='flex justify-center '>
@@ -42,11 +40,9 @@ const Home = () =>{
                         <ScrollButton></ScrollButton>
                     </div>
                 </div>  
-                
                 <h1 className="text-2xl py-3 mt-10 bg-slate-700 text-white rounded-xl border border-gray-200">© 2023 Copyright</h1>  
             </div>
         </div>
     )
 }
-
 export default Home;
