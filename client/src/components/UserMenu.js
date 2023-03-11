@@ -15,7 +15,7 @@ const UserMenu = () =>{
   return (
     <div>
         <button onClick={()=>{setOpen(!open)}} className="h-12 w-12 rounded-full overflow-hidden ">
-            <img className="h-full w-full object-cover" src={photoURL}/>
+            <img className="h-full w-full object-cover" alt='Avatar' src={photoURL}/>
         </button>
         <div className={`dropdown-menu ${open ? 'active': 'inactive'}`}>
             <button onClick={handleLogout} className="bg-grey-light hover:bg-grey text-grey-darkest font-bold py-2 px-2 rounded inline-flex items-center">

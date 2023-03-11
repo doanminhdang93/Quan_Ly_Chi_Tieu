@@ -6,7 +6,6 @@ import { monthlyChart_Data } from '../helper/helper';
 
 Chart.register(LineElement,Title, Tooltip, Legend, CategoryScale, LinearScale, PointElement,Filler);
 
-
 function MonthlyGraph() {
     const options = {
         responsive: true,
@@ -25,12 +24,10 @@ function MonthlyGraph() {
         MonthlyGraphData = <div>Error</div>
     }
 
-
     return (
         <div className="flex justify-center mx-auto w-11/12 h-96">
             {MonthlyGraphData}
         </div>
     );
 }
-
 export default MonthlyGraph;
